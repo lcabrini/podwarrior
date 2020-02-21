@@ -23,6 +23,13 @@ int init_db(void)
             sqlite3_free(em);
             return 1;
         }
+    } else {
+        if (sqlite3_open(PODW_DB_FILE, &db) != SQLITE_OK) {
+            fprintf(stderr, "could not open database: %s\n", 
+                    sqlite3_errmsg(db));
+            sqlite3_close(db);
+            return 1;
+        }
     }
 
     return 0;
@@ -35,17 +42,31 @@ void close_db(void)
 
 int add_feed(char *name, char *url)
 {
-    char *em = NULL;
-    char sql[512];
+    sqlite3_stmt *stmt;
+    char sql[] = "insert into feeds(name, url) values(?1, ?2);";
 
-    snprintf(sql, 200, "insert into feeds(name, url) values('%s', '%s')",
-            name, url);
+    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, name, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, url, -1, SQLITE_STATIC);
+
+    if (sqlite3_step(stmt) != SQLITE_DONE) {
+        fprintf(stderr, "Error inserting data: %s\n", sqlite3_errmsg(db));
+    }
+
+    sqlite3_finalize(stmt);
+    return 0;
+
+    /*    
+    fprintf(stderr, "SQL: %s\n", sql); 
+
+
 
     if (sqlite3_exec(db, sql, 0, 0, &em) != SQLITE_OK) {
         fprintf(stderr, "SQL Error: %s\n", em);
         sqlite3_free(em);
         return 1;
     }
+    */
 
     return 0;
 }

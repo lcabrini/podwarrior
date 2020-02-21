@@ -9,6 +9,8 @@
 
 #include <libxml2/libxml/xpath.h>
 
+extern int add_feed(char *, char *);
+
 void parse_opml(char *fn);
 
 #endif /* PODW_OPML */

@@ -14,9 +14,9 @@
 #include "config.h"
 
 #define CREATEDB_SQL \
-    "create table feeds(id int primary key, name text, url text);"
+    "create table feeds(id integer primary key, name text, url text);"
 
-sqlite3 *db;
+sqlite3 *db = NULL;
 
 int init_db(void);
 int add_feed(char *name, char *url);
