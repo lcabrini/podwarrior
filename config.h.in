@@ -1,0 +1,5 @@
+#ifndef PODW_CONFIG
+#define PODW_CONFIG
+
+#define PODW_HOME "@HOME@/.podw"
+#endif

@@ -9,9 +9,13 @@ PROG = podw
 all: $(OBJ)
 	gcc $(LDLIBS) -o $(PROG) $(OBJ)
 
-%.o: %.c
+%.o: %.c config.h
 	$(CC) -c $(CFLAGS) -o $@ $<
+
+config.h: config.h.in
+	sed -e "s|@HOME@|$$HOME|g" config.h.in > config.h
 
 .PHONY: clean
 clean:
 	$(RM) $(PROG) $(OBJ)
+

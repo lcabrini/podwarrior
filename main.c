@@ -21,6 +21,10 @@ int main(int argc, char *argv[])
     fclose(f);
     */
 
+    if (setup_podw_dir() != 0) {
+        fprintf(stderr, "Could not set up podwarrior directory");
+    }
+
     if (argc < 2) {
         fprintf(stderr, "no command given\n");
         return EXIT_FAILURE;
@@ -37,4 +41,16 @@ int main(int argc, char *argv[])
     }
 
     return EXIT_SUCCESS;
+}
+
+int setup_podw_dir(void)
+{
+    if (mkdir(PODW_HOME, 0755) < 0) {
+        if (errno == EEXIST || errno == 0)
+            return 0;
+        else 
+            return 1;
+    } else {
+        return 0;
+    }
 }
