@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Could not set up podwarrior directory");
     }
 
+    init_db();
+
     if (argc < 2) {
         fprintf(stderr, "no command given\n");
         return EXIT_FAILURE;

@@ -1,5 +1,5 @@
-#ifndef PODW_OPML
-#define PODW_OPML
+#ifndef _PODW_OPML
+#define _PODW_OPML
 
 #include <libxml2/libxml/xpath.h>
 

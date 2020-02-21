@@ -1,5 +1,6 @@
-#ifndef PODW_CONFIG
-#define PODW_CONFIG
+#ifndef _PODW_CONFIG
+#define _PODW_CONFIG
 
 #define PODW_HOME "@HOME@/.podw"
+#define PODW_DB_FILE PODW_HOME "/podw.sqlite"
 #endif

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall -O3 `curl-config --cflags` `xml2-config --cflags`
-LDLIBS = `curl-config --libs` `xml2-config --libs`
+LDLIBS = `curl-config --libs` `xml2-config --libs` -lsqlite3
 SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
 PROG = podw
