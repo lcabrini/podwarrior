@@ -8,7 +8,6 @@
 
 int init_db(void)
 {
-    sqlite3 *db;
     char *em = NULL;
 
     if (access(PODW_DB_FILE, R_OK) == -1) {
@@ -22,11 +21,32 @@ int init_db(void)
         if (sqlite3_exec(db, CREATEDB_SQL, 0, 0, &em) != SQLITE_OK) {
             fprintf(stderr, "SQL Error: %s\n", em);
             sqlite3_free(em);
-            sqlite3_close(db);
             return 1;
         }
     }
 
-    sqlite3_close(db);
     return 0;
 }
+
+void close_db(void)
+{
+    sqlite3_close(db);
+}
+
+int add_feed(char *name, char *url)
+{
+    char *em = NULL;
+    char sql[512];
+
+    snprintf(sql, 200, "insert into feeds(name, url) values('%s', '%s')",
+            name, url);
+
+    if (sqlite3_exec(db, sql, 0, 0, &em) != SQLITE_OK) {
+        fprintf(stderr, "SQL Error: %s\n", em);
+        sqlite3_free(em);
+        return 1;
+    }
+
+    return 0;
+}
+

@@ -18,6 +18,7 @@
 
 extern void parse_opml(char *);
 extern int init_db(void);
+extern void close_db(void);
 
 int setup_podw_dir(void);
 

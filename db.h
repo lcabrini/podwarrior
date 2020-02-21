@@ -13,9 +13,12 @@
 #include <sqlite3.h>
 #include "config.h"
 
-char CREATEDB_SQL[] =
-    "create table feeds(id int primary key, name text, url text);";
+#define CREATEDB_SQL \
+    "create table feeds(id int primary key, name text, url text);"
+
+sqlite3 *db;
 
 int init_db(void);
+int add_feed(char *name, char *url);
 
 #endif
