@@ -1,0 +1,12 @@
+/*
+ * Use of this source code is governed by an MIT-style
+ * license that can be found in the LICENSE file or at
+ * https://opensource.org/licenses/MIT.
+ */
+
+#ifndef _PODW_CONFIG
+#define _PODW_CONFIG
+
+#define PODW_HOME "@HOME@/.podw"
+#define PODW_DB_FILE PODW_HOME "/podw.sqlite"
+#endif
